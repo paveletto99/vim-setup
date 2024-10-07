@@ -1,0 +1,1 @@
+-- https://github.com/folke/trouble.nvim?tab=readme-ov-file

@@ -2,10 +2,6 @@ require("pobo.set")
 require("pobo.remap")
 require("pobo.packer")
 
--- DO NOT INCLUDE THIS
--- vim.opt.rtp:append("~/personal/streamer-tools")
--- DO NOT INCLUDE THIS
-
 local augroup = vim.api.nvim_create_augroup
 local PoboGroup = augroup('Pobo', {})
 

@@ -38,7 +38,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.6',
+    'nvim-telescope/telescope.nvim', tag = '0.1.8',
     -- or                            , branch = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } }
   }
@@ -51,16 +51,10 @@ return require('packer').startup(function(use)
     end
   })
 
+  use("folke/trouble.nvim")
   use({
-    "folke/trouble.nvim",
-    config = function()
-      require("trouble").setup {
-        icons = false,
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
+    "nvim-lualine/lualine.nvim",
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true },
   })
 
   use {
@@ -75,7 +69,7 @@ return require('packer').startup(function(use)
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
   use("nvim-treesitter/nvim-treesitter-context");
-  use("github/copilot.vim")
+  -- use("github/copilot.vim")
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v1.x',
@@ -112,6 +106,12 @@ return require('packer').startup(function(use)
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
+  }
+  use {
+    "folke/todo-comments.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
     }
   }
 end)
