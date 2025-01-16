@@ -2,6 +2,8 @@ require("pobo.set")
 require("pobo.remap")
 require("pobo.packer")
 
+require('lualine').setup()
+
 local augroup = vim.api.nvim_create_augroup
 local PoboGroup = augroup('Pobo', {})
 
@@ -33,6 +35,14 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
+
+
+autocmd("BufWritePre", {
+  pattern = { "*.zig", "*.zon" },
+  callback = function(ev)
+    vim.lsp.buf.format()
+  end
+})
 
 autocmd("BufWritePre", {
   pattern = "*.go",

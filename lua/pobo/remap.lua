@@ -43,3 +43,12 @@ vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+-- DEGUB 🐛🪲🦗🪳
+vim.keymap.set('n', '<F5>', '<Cmd>lua require("dap").continue()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<F10>', '<Cmd>lua require("dap").step_over()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<F11>', '<Cmd>lua require("dap").step_into()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<F12>', '<Cmd>lua require("dap").step_out()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>b', '<Cmd>lua require("dap").toggle_breakpoint()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>dr', '<Cmd>lua require("dap").repl.open()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Leader>dl', '<Cmd>lua require("dap").run_last()<CR>', { noremap = true, silent = true })

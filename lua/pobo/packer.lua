@@ -114,4 +114,12 @@ return require('packer').startup(function(use)
       "nvim-lua/plenary.nvim",
     }
   }
+  use('ziglang/zig.vim')
+  -- DEBUG TOOLS
+  use('mfussenegger/nvim-dap')
+  use('nvim-neotest/nvim-nio')
+  use('rcarriga/nvim-dap-ui')
+  use('theHamsta/nvim-dap-virtual-text')
+  use('leoluz/nvim-dap-go')
+  use('simrat39/rust-tools.nvim')
 end)
