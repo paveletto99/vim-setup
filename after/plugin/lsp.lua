@@ -6,7 +6,8 @@ lsp.preset("recommended")
 lsp.ensure_installed({
   'tsserver',
   'rust_analyzer',
-  'gopls'
+  'gopls',
+  'zls'
 })
 
 

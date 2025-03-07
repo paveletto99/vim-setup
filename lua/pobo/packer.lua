@@ -97,6 +97,7 @@ return require('packer').startup(function(use)
   use("eandrju/cellular-automaton.nvim")
   use("laytan/cloak.nvim")
   use("ray-x/go.nvim")
+  use("zbirenbaum/copilot.lua" )
   use("ray-x/guihua.lua") -- recommended if need floating window support
   use {
     "nvim-neo-tree/neo-tree.nvim",
