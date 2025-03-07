@@ -4,10 +4,13 @@ local lspconfig = require("lspconfig")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-  'tsserver',
+  -- 'tsserver',
   'rust_analyzer',
   'gopls',
-  'zls'
+  'yamlls',
+  'zls',
+  'jsonnet_ls',
+  'terraformls',
 })
 
 
@@ -68,7 +71,8 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
   vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-  vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set("i", "<C-i>", function() vim.lsp.buf.signature_help() end, opts)
+  -- vim.keymap.set("i", "<leader>h", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
 lsp.setup()
@@ -90,3 +94,73 @@ lspconfig.gopls.setup({
     },
   },
 })
+
+-- ZIG
+lspconfig.zls.setup({
+  -- Server-specific settings. See `:help lspconfig-setup`
+
+  -- omit the following line if `zls` is in your PATH
+  cmd = { '/home/pobo/myspace/zig/zls/zig-out/bin/zls' },
+  -- There are two ways to set config options:
+  --   - edit your `zls.json` that applies to any editor that uses ZLS
+  --   - set in-editor config options with the `settings` field below.
+  --
+  -- Further information on how to configure ZLS:
+  -- https://zigtools.org/zls/configure/
+  settings = {
+    zls = {
+      -- Whether to enable build-on-save diagnostics
+      --
+      -- Further information about build-on save:
+      -- https://zigtools.org/zls/guides/build-on-save/
+      -- enable_build_on_save = true,
+
+      -- omit the following line if `zig` is in your PATH
+      zig_exe_path = '/usr/bin/zig'
+    }
+  }
+})
+
+lspconfig.yamlls.setup {
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = "globPattern",
+        --["https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.22.0-standalone-strict/all.json"] = "/*.yaml",
+      },
+    },
+  },
+}
+
+lspconfig.terraformls.setup {
+  vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "*.tf", "*.tfvars" },
+    callback = function()
+      vim.lsp.buf.format()
+    end,
+  })
+}
+-- https://github.com/grafana/jsonnet-language-server/tree/main/editor/vim
+
+lspconfig.jsonnet_ls.setup {
+  settings = {
+    ext_vars = {
+      foo = 'bar',
+    },
+    formatting = {
+      -- default values
+      Indent              = 2,
+      MaxBlankLines       = 2,
+      StringStyle         = 'single',
+      CommentStyle        = 'slash',
+      PrettyFieldNames    = true,
+      PadArrays           = false,
+      PadObjects          = true,
+      SortImports         = true,
+      UseImplicitPlus     = true,
+      StripEverything     = false,
+      StripComments       = false,
+      StripAllButComments = false,
+    },
+  },
+}
