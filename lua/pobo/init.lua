@@ -1,6 +1,7 @@
 require("pobo.set")
 require("pobo.remap")
-require("pobo.packer")
+--require("pobo.packer")
+require("pobo.lazy_init")
 
 require('lualine').setup()
 
@@ -13,6 +14,24 @@ local yank_group = augroup('HighlightYank', {})
 function R(name)
   require("plenary.reload").reload_module(name)
 end
+
+
+vim.filetype.add({
+  extension = {
+      templ = 'templ',
+  }
+})
+
+autocmd('TextYankPost', {
+  group = yank_group,
+  pattern = '*',
+  callback = function()
+      vim.highlight.on_yank({
+          higroup = 'IncSearch',
+          timeout = 40,
+      })
+  end,
+})
 
 autocmd('TextYankPost', {
   group = yank_group,
@@ -29,19 +48,6 @@ autocmd({ "BufWritePre" }, {
   group = PoboGroup,
   pattern = "*",
   command = [[%s/\s\+$//e]],
-})
-
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-
-
-
-autocmd("BufWritePre", {
-  pattern = { "*.zig", "*.zon" },
-  callback = function(ev)
-    vim.lsp.buf.format()
-  end
 })
 
 autocmd("BufWritePre", {
@@ -67,11 +73,17 @@ autocmd("BufWritePre", {
   end
 })
 
-require('telescope').setup {
-  defaults = {
-    file_ignore_patterns = {
-      "node_modules",
-      "vendor"
-    }
-  }
-}
+autocmd('BufEnter', {
+  group = PoboGroup,
+  callback = function()
+      if vim.bo.filetype == "zig" then
+          vim.cmd.colorscheme("tokyonight-night")
+      else
+          vim.cmd.colorscheme("rose-pine-moon")
+      end
+  end
+})
+
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25

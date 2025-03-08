@@ -69,7 +69,6 @@ return require('packer').startup(function(use)
   use("mbbill/undotree")
   use("tpope/vim-fugitive")
   use("nvim-treesitter/nvim-treesitter-context");
-  -- use("github/copilot.vim")
   use {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v1.x',
@@ -92,12 +91,10 @@ return require('packer').startup(function(use)
       { 'rafamadriz/friendly-snippets' },
     }
   }
-
   use("folke/zen-mode.nvim")
   use("eandrju/cellular-automaton.nvim")
   use("laytan/cloak.nvim")
   use("ray-x/go.nvim")
-  use("zbirenbaum/copilot.lua" )
   use("ray-x/guihua.lua") -- recommended if need floating window support
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -108,6 +105,29 @@ return require('packer').startup(function(use)
       "MunifTanjim/nui.nvim",
       -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     }
+  }
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+        require("copilot").setup({
+            suggestion = {
+                enabled = true,
+                auto_trigger = false,
+                hide_during_completion = false,
+                debounce = 25,
+                keymap = {
+                    accept = false,
+                    accept_word = false,
+                    accept_line = "<Tab>",
+                    next = false,
+                    prev = false,
+                    dismiss = false,
+                },
+            },
+        })
+    end,
   }
   use {
     "folke/todo-comments.nvim",
