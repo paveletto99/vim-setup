@@ -30,10 +30,11 @@ return {
       require("fidget").setup({})
       require("mason").setup()
       require("mason-lspconfig").setup({
+          automatic_enable = true,
           ensure_installed = {
               "lua_ls",
               "rust_analyzer",
-              "gopls",
+              "gopls"
           },
           handlers = {
               function(server_name) -- default handler (optional)
@@ -74,6 +75,7 @@ return {
               end,
           }
       })
+
 
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
