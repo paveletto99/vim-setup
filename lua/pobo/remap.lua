@@ -102,6 +102,9 @@ vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
 
+vim.keymap.set("n", "<leader>mp", "<cmd>Preview<CR>", { desc = "Toggle markdown preview" })
+
+
 -- -- Only if you enable copilot inline suggestions
 -- vim.keymap.set("i", "<D-l>", function()
 --     require("copilot.suggestion").accept()
